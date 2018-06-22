@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="988b6c3fb2e3467d8eb689218f7f0c5e" Name="Diagram1">
         <EntityTypeShape EntityType="KinpanModel.t_KinpanWard" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="KinpanModel.t_KinpanDetails" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="KinpanModel.t_KinpanImgDetail" Width="1.5" PointX="0.875" PointY="3.5" />
-        <EntityTypeShape EntityType="KinpanModel.t_KinpanProList" Width="1.5" PointX="2.875" PointY="2.875" />
+        <EntityTypeShape EntityType="KinpanModel.t_KinpanProList" Width="1.5" PointX="4.75" PointY="3" />
+        <EntityTypeShape EntityType="KinpanModel.t_KinpanDetails" Width="1.5" PointX="1.625" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

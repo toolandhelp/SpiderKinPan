@@ -10,8 +10,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProDescription" Type="nvarchar" MaxLength="3000" Nullable="false" />
-          <Property Name="ProTextDtails" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="ProDescription" Type="nvarchar" MaxLength="3000" />
+          <Property Name="ProTextDtails" Type="nvarchar(max)" />
           <Property Name="ProID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreationAt" Type="datetime" Nullable="false" />
@@ -76,22 +76,10 @@
         </EntityType>
         <EntityContainer Name="KinpanEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="t_KinpanWard" EntityType="Self.t_KinpanWard" />
-          <EntitySet Name="t_KinpanDetails" EntityType="KinpanModel.t_KinpanDetails" />
           <EntitySet Name="t_KinpanImgDetail" EntityType="KinpanModel.t_KinpanImgDetail" />
           <EntitySet Name="t_KinpanProList" EntityType="KinpanModel.t_KinpanProList" />
+          <EntitySet Name="t_KinpanDetails" EntityType="KinpanModel.t_KinpanDetails" />
         </EntityContainer>
-        <EntityType Name="t_KinpanDetails">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProDescription" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
-          <Property Name="ProTextDtails" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
-          <Property Name="ProID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreationAt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Oth" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="t_KinpanImgDetail">
           <Key>
             <PropertyRef Name="id" />
@@ -123,6 +111,18 @@
           <Property Name="ProImgSavePath" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Oth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="t_KinpanDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProDescription" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="ProTextDtails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Oth" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -135,19 +135,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="t_KinpanDetails">
-            <EntityTypeMapping TypeName="KinpanModel.t_KinpanDetails">
-              <MappingFragment StoreEntitySet="t_KinpanDetails">
-                <ScalarProperty Name="Oth" ColumnName="Oth" />
-                <ScalarProperty Name="CreationAt" ColumnName="CreationAt" />
-                <ScalarProperty Name="ProName" ColumnName="ProName" />
-                <ScalarProperty Name="ProID" ColumnName="ProID" />
-                <ScalarProperty Name="ProTextDtails" ColumnName="ProTextDtails" />
-                <ScalarProperty Name="ProDescription" ColumnName="ProDescription" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -179,6 +166,19 @@
                 <ScalarProperty Name="ProDetailsUrl" ColumnName="ProDetailsUrl" />
                 <ScalarProperty Name="SalesPriceType" ColumnName="SalesPriceType" />
                 <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_KinpanDetails">
+            <EntityTypeMapping TypeName="KinpanModel.t_KinpanDetails">
+              <MappingFragment StoreEntitySet="t_KinpanDetails">
+                <ScalarProperty Name="Oth" ColumnName="Oth" />
+                <ScalarProperty Name="CreationAt" ColumnName="CreationAt" />
+                <ScalarProperty Name="ProName" ColumnName="ProName" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ProTextDtails" ColumnName="ProTextDtails" />
+                <ScalarProperty Name="ProDescription" ColumnName="ProDescription" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

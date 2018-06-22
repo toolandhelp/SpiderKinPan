@@ -72,8 +72,8 @@ namespace Kinpan.HandlerSpider
             int iAllCount = 0;
             try
             {
-                //test list_test
-                //string WebList = "http://www.kinpan.com/kpaward/bs_dm112";
+               //  test list_test
+                //string WebList = "http://www.kinpan.com/kpaward/zz_dk101";
                 //string ListHtmlTest = HtmlCodeRequest(WebList).Trim();
 
                 //List<t_KinpanProList> dtAllProListTest = GetKinpanAllLists(ListHtmlTest);
@@ -198,8 +198,8 @@ namespace Kinpan.HandlerSpider
         /// <returns></returns>
         public static List<t_KinpanProList> GetKinpanAllLists(string strHtml)
         {
-
             List<t_KinpanProList> lKinpanProList = new List<t_KinpanProList>();
+            if (strHtml.Length > 0) {           
             try
             {
                 HtmlDocument doc = new HtmlDocument();
@@ -344,7 +344,9 @@ namespace Kinpan.HandlerSpider
             {
                 MessageLog.AddErrorLogJson("GetKinpanAllLists()==>错误：", ex.ToString());
             }
+            }
             return lKinpanProList;
+           
         }
 
         /// <summary>
@@ -383,9 +385,10 @@ namespace Kinpan.HandlerSpider
                         {
                             HtmlNodeCollection lablaImg = item.SelectNodes(".//img");
                             HtmlAttribute ImgUrl = lablaImg[0].Attributes["bigpic"];
-                            string sImgUrl = ImgUrl.Value ?? "";
+                            string sImgUrl = ImgUrl.Value.Trim() ?? "";
                             HtmlAttribute Imgtitle = lablaImg[0].Attributes["title"];
-                            string sImgtitle = Imgtitle.Value ?? "";
+                            //   string sImgtitle = Imgtitle.Value ?? "";
+                            string sImgtitle = Imgtitle.Value.Trim().Length > 0 ? Imgtitle.Value.Trim() : "";
 
                             var fName = sImgUrl.Split('/').Last();
 
@@ -497,9 +500,11 @@ namespace Kinpan.HandlerSpider
                         foreach (var PicImgs in lablaImg)
                         {
                             HtmlAttribute ImgUrl = PicImgs.Attributes["src"];
+                           // string sImgUrl = ImgUrl.Value.Trim() ?? "";
                             string sImgUrl = ImgUrl.Value.Trim() ?? "";
                             HtmlAttribute Imgtitle = PicImgs.Attributes["title"];
-                            string sImgtitle = Imgtitle.Value.Trim() ?? "";
+                            // string sImgtitle = Imgtitle.Value.Trim() ?? "";
+                            string sImgtitle = Imgtitle.Value.Trim().Length > 0 ? Imgtitle.Value.Trim() : "";
 
                             var fName = sImgUrl.Split('/').Last();
 
@@ -547,10 +552,12 @@ namespace Kinpan.HandlerSpider
 
                     if (BllDetails.AddOrUpdate(mKinpanDetails))
                     {
+                        MessageLog.AddLog("成功数据==》"+ JsonConvert.SerializeObject(mKinpanDetails));
                         MessageLog.AddLog("项目详情添加成功");
                     }
                     else
                     {
+                        MessageLog.AddLog("失败数据==》" + JsonConvert.SerializeObject(mKinpanDetails));
                         MessageLog.AddLog("项目详情添加失败");
                     }
                     MessageLog.AddLog("添加项目详情==>");
@@ -574,7 +581,9 @@ namespace Kinpan.HandlerSpider
             var temps = (List<string>)obj;
             string simgAllpath = temps[0].ToString(); //保存地址
             string sdownUrl = temps[1].ToString(); //下载地址
-           
+
+            //初始化清空垃圾
+            System.GC.Collect();
 
             if (!string.IsNullOrEmpty(sdownUrl))
             {
@@ -585,12 +594,15 @@ namespace Kinpan.HandlerSpider
                     {
                         sdownUrl = WebUrl + sdownUrl;
                     }
+                    System.Net.ServicePointManager.DefaultConnectionLimit = 200;
+
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sdownUrl);
-                    request.Timeout = 6000;
+                    request.Timeout = 10000;
                     request.UserAgent = "User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705";
                     //request.UserAgent = "User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'";
                     //是否允许302
                     request.AllowAutoRedirect = true;
+                    request.KeepAlive = false;
                     WebResponse response = request.GetResponse();
                     Stream reader = response.GetResponseStream();
                     //文件名
@@ -613,19 +625,28 @@ namespace Kinpan.HandlerSpider
                         {
                             writer.Write(buff, 0, c);
                         }
+                        //释放所有
                         writer.Close();
                         writer.Dispose();
                         reader.Close();
                         reader.Dispose();
+                        reader = null;
+                        //取消请求
+                        request.Abort();
+                        request = null;
                         response.Close();
+                        response = null;
                     }
+                  
                 }
                 catch (Exception ex)
                 {
 
                     //test
-                    WebClient wc = new WebClient();
-                    wc.DownloadFile(sdownUrl, simgAllpath);
+                    //WebClient wc = new WebClient();
+                    //wc.DownloadFile(sdownUrl, simgAllpath);
+
+
                     MessageLog.AddErrorLogJson("DownLoadimg()==>下载路径：" + sdownUrl + "==> 保存路径：" + simgAllpath + "==>错误：", ex.ToString());
                     //  return "错误：地址" + url;
                 }
@@ -776,9 +797,9 @@ namespace Kinpan.HandlerSpider
                 httprequst.Accept = "*/*";
                 httprequst.Headers.Add("Accept-Language", "zh-cn,en-us;q=0.5");
                 httprequst.ServicePoint.Expect100Continue = false;
-                httprequst.Timeout = 10000;
+                httprequst.Timeout = 10000; //等待10秒
                 httprequst.AllowAutoRedirect = true;//是否允许302
-                ServicePointManager.DefaultConnectionLimit = 30;
+                ServicePointManager.DefaultConnectionLimit = 200;
                 //获取响应
                 HttpWebResponse webRes = (HttpWebResponse)httprequst.GetResponse();
                 //获取响应的文本流

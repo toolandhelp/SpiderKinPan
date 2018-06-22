@@ -26,8 +26,8 @@ namespace Kinpan.Model
         }
     
         public virtual DbSet<t_KinpanWard> t_KinpanWard { get; set; }
-        public virtual DbSet<t_KinpanDetails> t_KinpanDetails { get; set; }
         public virtual DbSet<t_KinpanImgDetail> t_KinpanImgDetail { get; set; }
         public virtual DbSet<t_KinpanProList> t_KinpanProList { get; set; }
+        public virtual DbSet<t_KinpanDetails> t_KinpanDetails { get; set; }
     }
 }
