@@ -49,6 +49,7 @@ namespace Kinpan.HandlerSpider
 
         public void ProcessRequest(HttpContext context)
         {
+
             context.Response.ContentType = "text/plain";
             string returnStr = "";
             ReturnModel model = new ReturnModel();
@@ -72,11 +73,11 @@ namespace Kinpan.HandlerSpider
             try
             {
                 //test list_test
-                string WebList = "http://www.kinpan.com/kpaward/bs_dm112";
-                string ListHtmlTest = HtmlCodeRequest(WebList).Trim();
+                //string WebList = "http://www.kinpan.com/kpaward/bs_dm112";
+                //string ListHtmlTest = HtmlCodeRequest(WebList).Trim();
 
-                List<t_KinpanProList> dtAllProListTest = GetKinpanAllLists(ListHtmlTest);
-                return rate;
+                //List<t_KinpanProList> dtAllProListTest = GetKinpanAllLists(ListHtmlTest);
+                //return rate;
 
                 string html = GetWebContent(WebUrl).Trim();
                 List<t_KinpanWard> listWard = GetKinpanMenusLists(html);
@@ -89,7 +90,7 @@ namespace Kinpan.HandlerSpider
                     //t2.Start(10);
                     for (int i = 0; i < listWard.Count; i++)
                     {
-                        MessageLog.AddLog("开始爬第（" + i + "）个菜单类型的数据==>");
+                        MessageLog.AddLog("开始爬第（" + i + "）个【"+ listWard[i].name + "】菜单类型的数据==>");
                         if (listWard[i].Url.ToString().Length > 0)
                         {
                             string WebUrlList = WebUrl + listWard[i].Url.ToString().TrimStart('/'); ;
@@ -585,7 +586,7 @@ namespace Kinpan.HandlerSpider
                         sdownUrl = WebUrl + sdownUrl;
                     }
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(sdownUrl);
-                    request.Timeout = 3000;
+                    request.Timeout = 6000;
                     request.UserAgent = "User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705";
                     //request.UserAgent = "User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'";
                     //是否允许302
@@ -602,23 +603,29 @@ namespace Kinpan.HandlerSpider
                     if (!Directory.Exists(tempPath))
                         Directory.CreateDirectory(tempPath);
 
-                    FileStream writer = new FileStream(simgAllpath , FileMode.OpenOrCreate, FileAccess.Write);
-                    byte[] buff = new byte[512];
-                    //实际读取的字节数
-                    int c = 0;
-                    while ((c = reader.Read(buff, 0, buff.Length)) > 0)
+                    if (!File.Exists(simgAllpath))
                     {
-                        writer.Write(buff, 0, c);
+                        FileStream writer = new FileStream(simgAllpath, FileMode.OpenOrCreate, FileAccess.Write);
+                        byte[] buff = new byte[512];
+                        //实际读取的字节数
+                        int c = 0;
+                        while ((c = reader.Read(buff, 0, buff.Length)) > 0)
+                        {
+                            writer.Write(buff, 0, c);
+                        }
+                        writer.Close();
+                        writer.Dispose();
+                        reader.Close();
+                        reader.Dispose();
+                        response.Close();
                     }
-                    writer.Close();
-                    writer.Dispose();
-                    reader.Close();
-                    reader.Dispose();
-                    response.Close();
-                    //   return (aFirstName + "." + aLastName);
                 }
                 catch (Exception ex)
                 {
+
+                    //test
+                    WebClient wc = new WebClient();
+                    wc.DownloadFile(sdownUrl, simgAllpath);
                     MessageLog.AddErrorLogJson("DownLoadimg()==>下载路径：" + sdownUrl + "==> 保存路径：" + simgAllpath + "==>错误：", ex.ToString());
                     //  return "错误：地址" + url;
                 }
