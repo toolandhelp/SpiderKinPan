@@ -392,7 +392,7 @@ namespace Kinpan.CommonLib
                 return;
 
             string path = string.Format("/JSON{0}.log", DateTime.Now.ToString("yyyyMMdd")); ;
-            string directory = GetMapPath("~/log");
+            string directory = GetMapPath("/log");
             if (string.IsNullOrEmpty(directory))
             {
                 return;

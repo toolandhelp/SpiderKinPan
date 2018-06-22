@@ -324,11 +324,12 @@ namespace Kinpan.HandlerSpider
                 HtmlAttribute urltemp = url[0].Attributes["href"];
                 string Surltemp = urltemp.Value.Trim() ?? "";
 
-                Surltemp = Surltemp.Substring(0, Surltemp.LastIndexOf("="));//移除最后数字 (十位数有问题）
+                // kpaward/search/12?stp=&dt=&lm=&g=112&sc=&st=&f=&ht=&ha=&sort=3  //添加 &page=?
+                // Surltemp = Surltemp.Substring(0, Surltemp.LastIndexOf("="));//移除最后数字 (十位数有问题）
 
-                if (iCount != ithisYe)
+                if (ithisYe <= (iCount + 1))
                 {
-                    string tepWebUrl = WebUrl + Surltemp + "=" + (ithisYe + 1);
+                    string tepWebUrl = WebUrl + Surltemp + "&page=" + (ithisYe + 1);
                     string ListHtml = HtmlCodeRequest(tepWebUrl).Trim();
                     GetKinpanAllLists(ListHtml);
                 }
@@ -557,7 +558,7 @@ namespace Kinpan.HandlerSpider
             }
             catch (Exception ex)
             {
-                MessageLog.AddLog("GetKinpanDetails()==>错误：" + ex);
+                MessageLog.AddErrorLogJson("GetKinpanDetails()==>错误：", ex.ToString());
             }
 
         }
