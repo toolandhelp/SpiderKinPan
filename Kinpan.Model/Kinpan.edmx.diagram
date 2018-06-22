@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="988b6c3fb2e3467d8eb689218f7f0c5e" Name="Diagram1">
+        <EntityTypeShape EntityType="KinpanModel.t_KinpanWard" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinpanModel.t_KinpanDetails" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KinpanModel.t_KinpanImgDetail" Width="1.5" PointX="0.875" PointY="3.5" />
+        <EntityTypeShape EntityType="KinpanModel.t_KinpanProList" Width="1.5" PointX="2.875" PointY="2.875" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Kinpan</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+    <input id="submit" style=" background-color: #CCC" type="button" value="开始计算" />
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        var errormsg;
+        $("#submit").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "Handler.ashx",
+                //data: { amount: amount },
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                beforeSend: function () {
+                    $('#submit').attr("disabled", true);
+                    $('#submit').val("正在进行中...");
+                },
+                success: function (data) {
+
+                    $('#submit').val(data.Result);
+             
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.status === 0) {
+                        errormsg = 'Not connect.\n Verify Network.';;
+                    } else if (jqXHR.status == 404) {
+                        errormsg = 'Requested page not found. [404]';;
+                    } else if (jqXHR.status == 500) {
+                        errormsg = 'Internal Server Error [500].';;
+                    } else if (exception === 'parsererror') {
+                        errormsg = 'Requested JSON parse failed.';;
+                    } else if (exception === 'timeout') {
+                        errormsg = 'Time out error.';;
+                    } else if (exception === 'abort') {
+                        errormsg = 'Ajax request aborted.';;
+                    } else {
+                        errormsg = 'Uncaught Error.';
+                    }
+                    alert(errormsg);
+                }
+            });
+        });
+
+    });
+</script>

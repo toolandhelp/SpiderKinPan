@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinpan.Console", "Kinpan.Console\Kinpan.Console.csproj", "{2B76BE00-E777-49D9-BCB4-C26EFEFCA0BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinpan.Model", "Kinpan.Model\Kinpan.Model.csproj", "{E6A8421A-7B75-4604-B17F-D50B546B16E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinpan.BLL", "Kinpan.BLL\Kinpan.BLL.csproj", "{026DF3C5-130F-4E0D-8D46-4220BA0597B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinpan.DAL", "Kinpan.DAL\Kinpan.DAL.csproj", "{11261441-117E-48B5-823B-B84D9F106801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinpan.CommonLib", "Kinpan.CommonLib\Kinpan.CommonLib.csproj", "{7DD7D787-8B23-42D6-B927-AC0E11BE8F44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinpan.HandlerSpider", "Kinpan.HandlerSpider\Kinpan.HandlerSpider.csproj", "{A5BA4745-003B-4A44-9167-98B1D5A8B6DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E6A8421A-7B75-4604-B17F-D50B546B16E0} = {E6A8421A-7B75-4604-B17F-D50B546B16E0}
+		{7DD7D787-8B23-42D6-B927-AC0E11BE8F44} = {7DD7D787-8B23-42D6-B927-AC0E11BE8F44}
+		{026DF3C5-130F-4E0D-8D46-4220BA0597B4} = {026DF3C5-130F-4E0D-8D46-4220BA0597B4}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B76BE00-E777-49D9-BCB4-C26EFEFCA0BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B76BE00-E777-49D9-BCB4-C26EFEFCA0BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B76BE00-E777-49D9-BCB4-C26EFEFCA0BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B76BE00-E777-49D9-BCB4-C26EFEFCA0BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6A8421A-7B75-4604-B17F-D50B546B16E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6A8421A-7B75-4604-B17F-D50B546B16E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6A8421A-7B75-4604-B17F-D50B546B16E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6A8421A-7B75-4604-B17F-D50B546B16E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{026DF3C5-130F-4E0D-8D46-4220BA0597B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{026DF3C5-130F-4E0D-8D46-4220BA0597B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{026DF3C5-130F-4E0D-8D46-4220BA0597B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{026DF3C5-130F-4E0D-8D46-4220BA0597B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11261441-117E-48B5-823B-B84D9F106801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11261441-117E-48B5-823B-B84D9F106801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11261441-117E-48B5-823B-B84D9F106801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11261441-117E-48B5-823B-B84D9F106801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD7D787-8B23-42D6-B927-AC0E11BE8F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD7D787-8B23-42D6-B927-AC0E11BE8F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD7D787-8B23-42D6-B927-AC0E11BE8F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD7D787-8B23-42D6-B927-AC0E11BE8F44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BA4745-003B-4A44-9167-98B1D5A8B6DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BA4745-003B-4A44-9167-98B1D5A8B6DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BA4745-003B-4A44-9167-98B1D5A8B6DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BA4745-003B-4A44-9167-98B1D5A8B6DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFA09F00-FB2B-4C8E-9DFE-4AAD391EF334}
+	EndGlobalSection
+EndGlobal

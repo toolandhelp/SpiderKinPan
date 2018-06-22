@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KinpanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_KinpanDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProDescription" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="ProTextDtails" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="ProID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreationAt" Type="datetime" Nullable="false" />
+          <Property Name="Oth" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="t_KinpanImgDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProImgUrl" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ProImgType" Type="int" Nullable="false" />
+          <Property Name="ProImgSavaPath" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ProImgTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Oth" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t_KinpanProList">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ProID" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SalesPriceType" Type="int" Nullable="false" />
+          <Property Name="ProDetailsUrl" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="DesignCompanyUrl" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ProImgUrl" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="SalesPrice" Type="float" Nullable="false" />
+          <Property Name="Views" Type="int" Nullable="false" />
+          <Property Name="ProName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DesignCompany" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyType" Type="nvarchar" MaxLength="150" />
+          <Property Name="ProImgSavePath" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Oth" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t_KinpanWard">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="KinpanModelStoreContainer">
+          <EntitySet Name="t_KinpanDetails" EntityType="Self.t_KinpanDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_KinpanImgDetail" EntityType="Self.t_KinpanImgDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_KinpanProList" EntityType="Self.t_KinpanProList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_KinpanWard" EntityType="Self.t_KinpanWard" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KinpanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="t_KinpanWard">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="KinpanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_KinpanWard" EntityType="Self.t_KinpanWard" />
+          <EntitySet Name="t_KinpanDetails" EntityType="KinpanModel.t_KinpanDetails" />
+          <EntitySet Name="t_KinpanImgDetail" EntityType="KinpanModel.t_KinpanImgDetail" />
+          <EntitySet Name="t_KinpanProList" EntityType="KinpanModel.t_KinpanProList" />
+        </EntityContainer>
+        <EntityType Name="t_KinpanDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProDescription" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="ProTextDtails" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="ProID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Oth" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_KinpanImgDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProImgUrl" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProImgType" Type="Int32" Nullable="false" />
+          <Property Name="ProImgSavaPath" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProImgTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Oth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="t_KinpanProList">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ProID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalesPriceType" Type="Int32" Nullable="false" />
+          <Property Name="ProDetailsUrl" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="DesignCompanyUrl" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProImgUrl" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="SalesPrice" Type="Double" Nullable="false" />
+          <Property Name="Views" Type="Int32" Nullable="false" />
+          <Property Name="ProName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DesignCompany" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyType" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ProImgSavePath" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Oth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KinpanModelStoreContainer" CdmEntityContainer="KinpanEntities">
+          <EntitySetMapping Name="t_KinpanWard">
+            <EntityTypeMapping TypeName="KinpanModel.t_KinpanWard">
+              <MappingFragment StoreEntitySet="t_KinpanWard">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_KinpanDetails">
+            <EntityTypeMapping TypeName="KinpanModel.t_KinpanDetails">
+              <MappingFragment StoreEntitySet="t_KinpanDetails">
+                <ScalarProperty Name="Oth" ColumnName="Oth" />
+                <ScalarProperty Name="CreationAt" ColumnName="CreationAt" />
+                <ScalarProperty Name="ProName" ColumnName="ProName" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ProTextDtails" ColumnName="ProTextDtails" />
+                <ScalarProperty Name="ProDescription" ColumnName="ProDescription" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_KinpanImgDetail">
+            <EntityTypeMapping TypeName="KinpanModel.t_KinpanImgDetail">
+              <MappingFragment StoreEntitySet="t_KinpanImgDetail">
+                <ScalarProperty Name="Oth" ColumnName="Oth" />
+                <ScalarProperty Name="ProImgTitle" ColumnName="ProImgTitle" />
+                <ScalarProperty Name="ProImgSavaPath" ColumnName="ProImgSavaPath" />
+                <ScalarProperty Name="ProImgType" ColumnName="ProImgType" />
+                <ScalarProperty Name="ProImgUrl" ColumnName="ProImgUrl" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_KinpanProList">
+            <EntityTypeMapping TypeName="KinpanModel.t_KinpanProList">
+              <MappingFragment StoreEntitySet="t_KinpanProList">
+                <ScalarProperty Name="Oth" ColumnName="Oth" />
+                <ScalarProperty Name="ProImgSavePath" ColumnName="ProImgSavePath" />
+                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
+                <ScalarProperty Name="DesignCompany" ColumnName="DesignCompany" />
+                <ScalarProperty Name="ProName" ColumnName="ProName" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+                <ScalarProperty Name="ProImgUrl" ColumnName="ProImgUrl" />
+                <ScalarProperty Name="DesignCompanyUrl" ColumnName="DesignCompanyUrl" />
+                <ScalarProperty Name="ProDetailsUrl" ColumnName="ProDetailsUrl" />
+                <ScalarProperty Name="SalesPriceType" ColumnName="SalesPriceType" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
