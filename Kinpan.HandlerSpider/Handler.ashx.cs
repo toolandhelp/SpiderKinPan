@@ -481,9 +481,12 @@ namespace Kinpan.HandlerSpider
                     {
                         HtmlNodeCollection mss = picImg.SelectNodes(".//p"); //只可能有一个
 
-                        foreach (var item in mss)
+                        if (mss.Count > 0)
                         {
-                            sms += item.InnerText.Trim() + "、";
+                            foreach (var item in mss)
+                            {
+                                sms += item.InnerText.Trim() + "、";
+                            }
                         }
 
                         List<string> lmsStr = new List<string>();
@@ -504,8 +507,16 @@ namespace Kinpan.HandlerSpider
                             string sImgUrl = ImgUrl.Value.Trim() ?? "";
                             HtmlAttribute Imgtitle = PicImgs.Attributes["title"];
                             // string sImgtitle = Imgtitle.Value.Trim() ?? "";
-                            string sImgtitle = Imgtitle.Value.Trim().Length > 0 ? Imgtitle.Value.Trim() : "";
+                            string sImgtitle = "";
+                            try
+                            {
+                                sImgtitle = Imgtitle.Value.Trim().Length > 0 ? Imgtitle.Value.Trim() : "";
 
+                            }
+                            catch (Exception)
+                            {
+
+                            }
                             var fName = sImgUrl.Split('/').Last();
 
                             string tempImgPath = ImgPath + "\\" + fName;
@@ -545,9 +556,9 @@ namespace Kinpan.HandlerSpider
 
                     t_KinpanDetails mKinpanDetails = new t_KinpanDetails();
                     mKinpanDetails.ProID = ProID;
-                    mKinpanDetails.ProName = ProName ?? "";
-                    mKinpanDetails.ProTextDtails = szhi ?? "";
-                    mKinpanDetails.ProDescription = sms ?? "";
+                    mKinpanDetails.ProName = ProName;
+                    mKinpanDetails.ProTextDtails = szhi;
+                    mKinpanDetails.ProDescription = sms ;
                     mKinpanDetails.CreationAt = System.DateTime.Now;
 
                     if (BllDetails.AddOrUpdate(mKinpanDetails))
