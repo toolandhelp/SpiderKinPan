@@ -803,9 +803,13 @@ namespace Kinpan.HandlerSpider
                 //设置请求的方法
                 httprequst.Method = "GET";
                 //设置标头值
-               // httprequst.UserAgent = "User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705";
+                // httprequst.UserAgent = "User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705";
+                httprequst.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+              
+                httprequst.Connection = "keep-alive";
+                httprequst.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
                 httprequst.UserAgent = "User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'";
-                httprequst.Accept = "*/*";
+                //httprequst.Accept = "*/*";
                 httprequst.Headers.Add("Accept-Language", "zh-cn,en-us;q=0.5");
                 httprequst.ServicePoint.Expect100Continue = false;
                 httprequst.Timeout = 10000; //等待10秒
