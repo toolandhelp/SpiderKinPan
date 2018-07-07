@@ -1,0 +1,191 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <div id="issueTable_wrapper">
+        <table class="display dataTable no-footer" id="issueTable" role="grid" aria-describedby="issueTable_info" style="width: 1170px;">
+            <thead><tr role="row"><th class="sorting" tabindex="0" aria-controls="issueTable" rowspan="1" colspan="1" aria-label="以升序排列此列" style="width: 611px;"><i class="icon-question-sign"></i></th><th class="sorting_asc" tabindex="0" aria-controls="issueTable" rowspan="1" colspan="1" aria-label="以降序排列此列" style="width: 128px;" aria-sort="ascending"><i class="icon-tag"></i></th><th class="sorting" tabindex="0" aria-controls="issueTable" rowspan="1" colspan="1" aria-label="以升序排列此列" style="width: 18px;"><i class="icon-comment"></i></th><th class="sorting" tabindex="0" aria-controls="issueTable" rowspan="1" colspan="1" aria-label="以升序排列此列" style="width: 103px;"><i class="icon-user"></i></th><th class="sorting" tabindex="0" aria-controls="issueTable" rowspan="1" colspan="1" aria-label="以升序排列此列" style="width: 130px;"><i class="icon-time"></i></th></tr></thead>
+            <tbody><tr class="unread odd" role="row"><td><a href="https://github.com/ssy341/datatables-cn/issues/364" target="_blank">datatables 固定列 表格没有数据</a></td><td class="sorting_1"></td><td>0<i class="icon-comment"></i></td><td><a href="https://github.com/648294356" target="_blank">648294356</a></td><td class="">2018-06-22 16:38:28</td></tr><tr class="unread even" role="row"><td><a href="https://github.com/ssy341/datatables-cn/issues/363" target="_blank">有关分页的问题</a></td><td class="sorting_1"></td><td>0<i class="icon-comment"></i></td><td><a href="https://github.com/abbbbXd" target="_blank">abbbbXd</a></td><td class="">2018-06-21 03:06:24</td></tr><tr class="unread odd" role="row"><td><a href="https://github.com/ssy341/datatables-cn/issues/362" target="_blank">请问如何自定义css美化datatables？</a></td><td class="sorting_1"></td><td>0<i class="icon-comment"></i></td><td><a href="https://github.com/yuhcao" target="_blank">yuhcao</a></td><td class="">2018-06-21 02:18:27</td></tr><tr class="unread even" role="row"><td><a href="https://github.com/ssy341/datatables-cn/issues/361" target="_blank">此表格插件能像excel表那样添加计算公式吗</a></td><td class="sorting_1"></td><td>0<i class="icon-comment"></i></td><td><a href="https://github.com/chenlinyan87" target="_blank">chenlinyan87</a></td><td class="">2018-06-20 10:56:06</td></tr><tr role="row" class="odd"><td><a href="https://github.com/ssy341/datatables-cn/issues/359" target="_blank">分组求和</a></td><td class="sorting_1"></td><td>0<i class="icon-comment"></i></td><td><a href="https://github.com/MelodyPfd" target="_blank">MelodyPfd</a></td><td class="">2018-06-03 23:27:13</td></tr><tr role="row" class="even"><td><a href="https://github.com/ssy341/datatables-cn/issues/325" target="_blank">局部刷新时 table 出现嵌套加载</a></td><td class="sorting_1"></td><td>1<i class="icon-comment"></i></td><td><a href="https://github.com/skyofsea" target="_blank">skyofsea</a></td><td class="">2018-06-01 11:58:56</td></tr><tr role="row" class="odd"><td><a href="https://github.com/ssy341/datatables-cn/issues/358" target="_blank">同一页面上存在两个相同ID的dataTable相关的问题</a></td><td class="sorting_1"></td><td>2<i class="icon-comment"></i></td><td><a href="https://github.com/4198222025" target="_blank">4198222025</a></td><td class="">2018-06-01 11:47:26</td></tr><tr role="row" class="even"><td><a href="https://github.com/ssy341/datatables-cn/issues/352" target="_blank">如何给td添加title属性</a></td><td class="sorting_1"></td><td>1<i class="icon-comment"></i></td><td><a href="https://github.com/MaWenYan0810" target="_blank">MaWenYan0810</a></td><td class="">2018-05-31 11:47:58</td></tr><tr role="row" class="odd"><td><a href="https://github.com/ssy341/datatables-cn/issues/356" target="_blank">datatables 需要把表格数据导出成一个excel表格文件，包含多个worksheet</a></td><td class="sorting_1"></td><td>2<i class="icon-comment"></i></td><td><a href="https://github.com/brucemj" target="_blank">brucemj</a></td><td class="">2018-05-30 16:36:49</td></tr><tr role="row" class="even"><td><a href="https://github.com/ssy341/datatables-cn/issues/350" target="_blank">datatables的每列求和，并根据过滤后结果，动态变化</a></td><td class="sorting_1"></td><td>0<i class="icon-comment"></i></td><td><a href="https://github.com/wendyShao0129" target="_blank">wendyShao0129</a></td><td class="">2018-05-15 09:12:01</td></tr></tbody>
+        </table>
+    </div>
+</html>
+<script>
+    var githubTable;
+    $(document).ready(function () {
+
+        //配置DataTables默认参数
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                "url": "/assets/Chinese.txt"
+            },
+            "dom": "l<'#toolbar'>frtip"
+        });
+
+        //issue表格初始化
+        githubTable = $("#issueTable").DataTable({
+            //调用github api 获取issues 数据
+            ajax: {
+                url: "https://api.github.com/repos/ssy341/datatables-cn/issues",
+                dataSrc: ""
+            },
+            //默认最后一列（最后更新时间）降序排列
+            order: [[4, "desc"]],
+            //行被创建回调
+            createdRow: function (row, data, dataIndex) {
+                var updated_at = new Date(Date.parse(data.updated_at)).Format("yyyy-MM-dd hh:mm:ss");
+                updated_at = new Date(updated_at).getTime();
+                var current = new Date().getTime();
+                var bl = current - updated_at;
+                var s = 5 * 24 * 60 * 60 * 1000;
+                //最后更新日期在最近5天则突出显示
+                if (bl < s) {
+                    $(row).addClass('unread');
+                }
+            },
+            //行创建完成后回调
+            rowCallback: function (row, data, index) {
+                var tags = $(row).find("td:eq(1)");
+                if (tags.text().indexOf("置顶") > 0) {
+                    var title = $(row).find("td:eq(0)");
+                    var hot = "";
+                    title.html(title.html() + hot);
+                }
+            },
+            columnDefs: [
+                {
+                    targets: 4,
+                    data: "updated_at",
+                    title: "",
+                    render: function (data, type, row, meta) {
+                        return new Date(Date.parse(data)).Format("yyyy-MM-dd hh:mm:ss");
+                    }
+                },
+                {
+                    targets: 3,
+                    data: null,
+                    title: "",
+                    render: function (data, type, row, meta) {
+                        return "" + row.user.login + "";
+                    }
+                },
+                {
+                    targets: 2,
+                    data: "comments",
+                    title: "",
+                    render: function (data, type, row, meta) {
+                        var comments = data + "";
+                        return comments;
+                    }
+                },
+                {
+                    targets: 1,
+                    data: null,
+                    title: "",
+                    render: function (data, type, row, meta) {
+                        var labels = "";
+                        if (row.labels.length) {
+                            for (var j = 0, labelslen = row.labels.length; j < labelslen; j++) {
+                                labels += "" +
+                                    row.labels[j].name + "";
+                                if (j != labelslen - 1) {
+                                    labels += ",";
+                                }
+                            }
+                        }
+                        return labels;
+                    }
+                },
+                {
+                    targets: 0,
+                    data: "title",
+                    title: "",
+                    render: function (data, type, row, meta) {
+                        var title = "" + row.title + "";
+                        return title;
+                    }
+                }
+            ],
+            initComplete: function () {
+                //表格加载完毕，手动添加按钮到表格上
+                $("#toolbar").css("width", "100px").css("display", "inline").css("margin-left", "10px");
+                $("#toolbar").append("我有问题");
+                $("#toolbar").append("DIY");
+                $("#toolbar").append("查看已解决问题");
+                $("#toolbar").append("查看本实例代码");
+
+                //加载已经关闭的问题
+                $(".closedIssue").clickToggle(function () {
+                    //调用url方法切换dt的数据源
+                    githubTable.ajax.url("https://api.github.com/repos/ssy341/datatables-cn/issues?state=closed").load();
+                    $(this).text("查看未解决问题").css("color", "#FF0000");
+                }, function () {
+                    githubTable.ajax.url("https://api.github.com/repos/ssy341/datatables-cn/issues").load();
+                    $(this).text("查看已解决问题").css("color", "#009900");
+                });
+
+                //查看本例子代码
+                $(".viewCode").click(function () {
+                    //显示模态框展示代码
+                    $("#issueTableCode").modal("show");
+                    $("#issueTableCodeContent").html($("#issueTableScript").html());
+                });
+            }
+        });
+    });
+
+    //时间格式化
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1,
+            //月份
+            "d+": this.getDate(),
+            //日
+            "h+": this.getHours(),
+            //小时
+            "m+": this.getMinutes(),
+            //分
+            "s+": this.getSeconds(),
+            //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3),
+            //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    };
+
+    //事件来回切换方法
+    //solve this
+    //reference http://stackoverflow.com/questions/4911577/jquery-click-toggle-between-two-functions
+    (function ($) {
+        $.fn.clickToggle = function (func1, func2) {
+            var funcs = [func1, func2];
+            this.data('toggleclicked', 0);
+            this.click(function () {
+                var data = $(this).data();
+                var tc = data.toggleclicked;
+                $.proxy(funcs[tc], this)();
+                data.toggleclicked = (tc + 1) % 2;
+            });
+            return this;
+        };
+    }(jQuery));
+</script>

@@ -65,6 +65,19 @@ namespace Kinpan.BLL
         #endregion
 
         /// <summary>
+        /// 根据查询对象分页获取记录
+        /// </summary>
+        /// <param name="iPageIndex"></param>
+        /// <param name="iPageSize"></param>
+        /// <param name="iTotalRecord"></param>
+        /// <param name="conditionItem"></param>
+        /// <returns></returns>
+        public IList<t_KinpanProList> GetPageListByCondition(int iPageIndex, int iPageSize, ref int iTotalRecord, ConditionModel conditionItem)
+        {
+            return dbContext.SearchByPageCondition(iPageIndex, iPageSize, ref iTotalRecord, conditionItem);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="orgIds"></param>
